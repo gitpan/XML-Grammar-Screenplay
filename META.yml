@@ -1,0 +1,53 @@
+---
+name: XML-Grammar-Screenplay
+version: 0.01
+author:
+  - 'Shlomi Fish <shlomif@cpan.org>'
+abstract: module implementing an XML grammar for screenplays.
+license: bsd
+resources:
+  license: http://www.opensource.org/licenses/bsd-license.php
+build_requires:
+  Class::Accessor: 0
+  Test::More: 0
+  XML::Writer: 0
+provides:
+  XML::Grammar::Screenplay:
+    file: lib/XML/Grammar/Screenplay.pm
+    version: 0.01
+  XML::Grammar::Screenplay::App::FromProto:
+    file: lib/XML/Grammar/Screenplay/App/FromProto.pm
+  XML::Grammar::Screenplay::App::ToDocBook:
+    file: lib/XML/Grammar/Screenplay/App/ToDocBook.pm
+  XML::Grammar::Screenplay::Base:
+    file: lib/XML/Grammar/Screenplay/Base.pm
+  XML::Grammar::Screenplay::FromProto:
+    file: lib/XML/Grammar/Screenplay/FromProto.pm
+    version: 0.01
+  XML::Grammar::Screenplay::FromProto::Node:
+    file: lib/XML/Grammar/Screenplay/FromProto/Nodes.pm
+  XML::Grammar::Screenplay::FromProto::Node::Comment:
+    file: lib/XML/Grammar/Screenplay/FromProto/Nodes.pm
+  XML::Grammar::Screenplay::FromProto::Node::Description:
+    file: lib/XML/Grammar/Screenplay/FromProto/Nodes.pm
+  XML::Grammar::Screenplay::FromProto::Node::Element:
+    file: lib/XML/Grammar/Screenplay/FromProto/Nodes.pm
+  XML::Grammar::Screenplay::FromProto::Node::InnerDesc:
+    file: lib/XML/Grammar/Screenplay/FromProto/Nodes.pm
+  XML::Grammar::Screenplay::FromProto::Node::List:
+    file: lib/XML/Grammar/Screenplay/FromProto/Nodes.pm
+  XML::Grammar::Screenplay::FromProto::Node::Paragraph:
+    file: lib/XML/Grammar/Screenplay/FromProto/Nodes.pm
+  XML::Grammar::Screenplay::FromProto::Node::Saying:
+    file: lib/XML/Grammar/Screenplay/FromProto/Nodes.pm
+  XML::Grammar::Screenplay::FromProto::Node::Text:
+    file: lib/XML/Grammar/Screenplay/FromProto/Nodes.pm
+  XML::Grammar::Screenplay::FromProto::Node::WithContent:
+    file: lib/XML/Grammar/Screenplay/FromProto/Nodes.pm
+  XML::Grammar::Screenplay::ToDocBook:
+    file: lib/XML/Grammar/Screenplay/ToDocBook.pm
+    version: 0.01
+generated_by: Module::Build version 0.2805
+meta-spec:
+  url: http://module-build.sourceforge.net/META-spec-v1.2.html
+  version: 1.2
