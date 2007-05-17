@@ -1,5 +1,10 @@
 Revision history for XML-Grammar-Screeplay
 
+0.0101  Thu May 17 19:14:01 IDT 2007
+        - BUG FIX: Changed to open the filename in 
+        XML::Grammar::Screenplay::FromProto in ":utf8" mode. 
+        - BUG FIX: added more dependencies to the Build.PL.
+
 0.01    
         First version, released on an unsuspecting world.
 

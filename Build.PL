@@ -32,8 +32,19 @@ my $builder = Test::Run::Builder->new(
     dist_author         => 'Shlomi Fish <shlomif@cpan.org>',
     dist_version_from   => 'lib/XML/Grammar/Screenplay.pm',
     build_requires => {
+        'File::Find' => 0,
         'Test::More' => 0,
-        'Class::Accessor' => 0,
+        'Test::XML' => 0,
+    },
+    requires => 
+    {
+        'Carp' => 0,
+        'Data::Dumper' => 0,
+        'List::Util' => 0,
+        'Moose' => 0,
+        'Parse::RecDescent' => 0,
+        'warnings' => 0,
+        'XML::LibXSLT' => 0,
         'XML::Writer' => 0,
     },
     add_to_cleanup      => [ 'XML-Grammar-Screeplay-*' ],

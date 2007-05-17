@@ -377,6 +377,7 @@ sub _read_file
 
     open my $in, "<", $filename or
         confess "Could not open the file \"$filename\" for slurping.";
+    binmode $in, ":utf8";
     my $contents;
     {
         local $/;

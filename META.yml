@@ -1,20 +1,29 @@
 ---
 name: XML-Grammar-Screenplay
-version: 0.01
+version: 0.0101
 author:
   - 'Shlomi Fish <shlomif@cpan.org>'
 abstract: module implementing an XML grammar for screenplays.
 license: bsd
 resources:
   license: http://www.opensource.org/licenses/bsd-license.php
-build_requires:
-  Class::Accessor: 0
-  Test::More: 0
+requires:
+  Carp: 0
+  Data::Dumper: 0
+  List::Util: 0
+  Moose: 0
+  Parse::RecDescent: 0
+  XML::LibXSLT: 0
   XML::Writer: 0
+  warnings: 0
+build_requires:
+  File::Find: 0
+  Test::More: 0
+  Test::XML: 0
 provides:
   XML::Grammar::Screenplay:
     file: lib/XML/Grammar/Screenplay.pm
-    version: 0.01
+    version: 0.0101
   XML::Grammar::Screenplay::App::FromProto:
     file: lib/XML/Grammar/Screenplay/App/FromProto.pm
   XML::Grammar::Screenplay::App::ToDocBook:
