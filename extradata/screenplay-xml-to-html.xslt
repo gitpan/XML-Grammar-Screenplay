@@ -3,8 +3,8 @@
      >
 
 <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"
- doctype-public="-//OASIS//DTD DocBook XML V4.3//EN"
- doctype-system="/usr/share/sgml/docbook/xml-dtd-4.3/docbookx.dtd"
+ doctype-public="-//W3C//DTD XHTML 1.1//EN"
+ doctype-system="http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"
  />
 
 <xsl:template match="/">
@@ -12,21 +12,28 @@
 </xsl:template>
 
 <xsl:template match="body">
-    <article>
-        <xsl:attribute name="id">
-            <xsl:value-of select="@id" />
-        </xsl:attribute>
-        <xsl:apply-templates select="scene" />
-    </article>
+    <html>
+        <head>
+            <title>My Screenplay</title>
+        </head>
+        <body>
+            <div class="screenplay">
+            <xsl:attribute name="id">
+                <xsl:value-of select="@id" />
+            </xsl:attribute>
+            <xsl:apply-templates select="scene" />
+            </div>
+        </body>
+    </html>
 </xsl:template>
 
 <xsl:template match="scene">
-    <section>
-        <xsl:attribute name="id">
-            <xsl:value-of select="@id" />
-        </xsl:attribute>
+    <div class="scene" id="scene-{@id}">
         <!-- Make the title the title attribute or "ID" if does not exist. -->
-        <title>
+        <xsl:element name="h{count(ancestor-or-self::scene)}">
+            <xsl:attribute name="id">
+                <xsl:value-of select="@id" />
+            </xsl:attribute>
             <xsl:choose>
                 <xsl:when test="@title">
                     <xsl:value-of select="@title" />
@@ -34,30 +41,28 @@
                 <xsl:otherwise>
                     <xsl:value-of select="@id" />
                 </xsl:otherwise>
-            </xsl:choose> 
-        </title>
+            </xsl:choose>
+        </xsl:element>
         <xsl:apply-templates select="scene|description|saying" />
-    </section>
+    </div>
 </xsl:template>
 
 <xsl:template match="description">
-    <section role="description" id="{generate-id()}">
-        <title></title>
-            <xsl:apply-templates />
-    </section>
+    <div class="description">
+        <xsl:apply-templates />
+    </div>
 </xsl:template>
 
 <xsl:template match="saying">
-    <section role="saying" id="{generate-id()}">
-        <title></title>
+    <div class="saying">
         <xsl:apply-templates />
-    </section>
+    </div>
 </xsl:template>
 
 <xsl:template match="para">
-    <para>
+    <p>
         <xsl:if test="local-name(..) = 'saying'">
-            <emphasis role="bold"><xsl:value-of select="../@character" />: </emphasis>
+            <strong class="saying"><xsl:value-of select="../@character" />: </strong>
         </xsl:if>
         <xsl:if test="local-name(..) = 'description' and ../child::para[position()=1] = .">
             [
@@ -66,25 +71,26 @@
         <xsl:if test="local-name(..) = 'description' and ../child::para[position()=last()] = .">
             ]
         </xsl:if>
-    </para>
+    </p>
 </xsl:template>
 
 <xsl:template match="ulink">
-    <ulink>
-        <xsl:attribute name="url">
+    <a>
+        <xsl:attribute name="href">
             <xsl:value-of select="@url" />
         </xsl:attribute>
-    </ulink>
+        <xsl:apply-templates />
+    </a>
 </xsl:template>
 
 <xsl:template match="bold">
-    <emphasis role="bold">
+    <strong class="bold">
         <xsl:apply-templates />
-    </emphasis>
+    </strong>
 </xsl:template>
 
 <xsl:template match="inlinedesc">
-    <phrase>[<xsl:apply-templates />]</phrase>
+    <span class="inlinedesc">[<xsl:apply-templates />]</span>
 </xsl:template>
 
 </xsl:stylesheet>

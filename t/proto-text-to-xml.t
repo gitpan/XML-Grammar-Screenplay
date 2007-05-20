@@ -5,7 +5,7 @@ use warnings;
 
 use Test::More;
 
-use Test::XML tests => 20;
+use Test::XML tests => 24;
 
 use XML::LibXML;
 
@@ -36,9 +36,11 @@ my @tests = (qw(
         with-comments
         with-multi-para-desc
         with-multi-line-comments
+        scenes-with-titles
+        with-entities
     ));
 
-# TEST:$num_texts=10
+# TEST:$num_texts=12
 
 my $grammar = XML::Grammar::Screenplay::FromProto->new();
 

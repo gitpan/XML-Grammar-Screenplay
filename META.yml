@@ -1,6 +1,6 @@
 ---
 name: XML-Grammar-Screenplay
-version: 0.0101
+version: 0.02
 author:
   - 'Shlomi Fish <shlomif@cpan.org>'
 abstract: module implementing an XML grammar for screenplays.
@@ -10,6 +10,7 @@ resources:
 requires:
   Carp: 0
   Data::Dumper: 0
+  HTML::Entities: 0
   List::Util: 0
   Moose: 0
   Parse::RecDescent: 0
@@ -23,11 +24,13 @@ build_requires:
 provides:
   XML::Grammar::Screenplay:
     file: lib/XML/Grammar/Screenplay.pm
-    version: 0.0101
+    version: 0.02
   XML::Grammar::Screenplay::App::FromProto:
     file: lib/XML/Grammar/Screenplay/App/FromProto.pm
   XML::Grammar::Screenplay::App::ToDocBook:
     file: lib/XML/Grammar/Screenplay/App/ToDocBook.pm
+  XML::Grammar::Screenplay::App::ToHTML:
+    file: lib/XML/Grammar/Screenplay/App/ToHTML.pm
   XML::Grammar::Screenplay::Base:
     file: lib/XML/Grammar/Screenplay/Base.pm
   XML::Grammar::Screenplay::FromProto:
@@ -55,6 +58,9 @@ provides:
     file: lib/XML/Grammar/Screenplay/FromProto/Nodes.pm
   XML::Grammar::Screenplay::ToDocBook:
     file: lib/XML/Grammar/Screenplay/ToDocBook.pm
+    version: 0.01
+  XML::Grammar::Screenplay::ToHTML:
+    file: lib/XML/Grammar/Screenplay/ToHTML.pm
     version: 0.01
 generated_by: Module::Build version 0.2805
 meta-spec:

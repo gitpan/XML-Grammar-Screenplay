@@ -88,7 +88,7 @@ para_sep:      /(\n\s*)+/
 speech_or_desc:   speech_unit  
                 | desc_unit
 
-plain_inner_text:  /([^\n<\[\]]+\n?)+/ { $item[1] }
+plain_inner_text:  /([^\n<\[\]&]+\n?)+/ { $item[1] }
 
 inner_tag:         opening_tag  inner_text closing_tag {
         my ($open, $inside, $close) = @item[1..$#item];
@@ -117,8 +117,14 @@ inner_desc:      /\[/ inner_text /\]/ {
 inner_tag_or_desc:    inner_tag
                    |  inner_desc
 
+inner_entity:      /\&\w+;/ {
+        my $inside = $item[1];
+        HTML::Entities::decode_entities($inside)
+    }
+
 inner_text_unit:    plain_inner_text  { [ $item[1] ] }
                  |  inner_tag_or_desc { [ $item[1] ] }
+                 |  inner_entity      { [ $item[1] ] }
 
 inner_text:       inner_text_unit(s) {
         [ map { @{$_} } @{$item[1]} ]
@@ -356,9 +362,13 @@ sub _write_scene
         {
             Carp::confess("Unspecified id for scene!");
         }
+
+        my $title = $scene->lookup_attr("title");
+        my @t = (defined($title) ? (title => $title) : ());
+
         $self->_output_tag_with_childs(
             {
-                'start' => ["scene", id => $id],
+                'start' => ["scene", id => $id, @t],
                 elem => $scene,
             }
         );

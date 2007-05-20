@@ -40,6 +40,7 @@ my $builder = Test::Run::Builder->new(
     {
         'Carp' => 0,
         'Data::Dumper' => 0,
+        'HTML::Entities' => 0,
         'List::Util' => 0,
         'Moose' => 0,
         'Parse::RecDescent' => 0,
