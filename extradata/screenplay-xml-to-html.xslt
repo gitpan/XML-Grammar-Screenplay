@@ -62,7 +62,8 @@
 <xsl:template match="para">
     <p>
         <xsl:if test="local-name(..) = 'saying'">
-            <strong class="saying"><xsl:value-of select="../@character" />: </strong>
+            <strong class="sayer"><xsl:value-of select="../@character" />:</strong> 
+            <xsl:text> </xsl:text>
         </xsl:if>
         <xsl:if test="local-name(..) = 'description' and ../child::para[position()=1] = .">
             [
@@ -91,6 +92,10 @@
 
 <xsl:template match="inlinedesc">
     <span class="inlinedesc">[<xsl:apply-templates />]</span>
+</xsl:template>
+
+<xsl:template match="br">
+    <br />
 </xsl:template>
 
 </xsl:stylesheet>

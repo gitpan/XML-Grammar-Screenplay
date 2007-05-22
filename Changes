@@ -1,5 +1,12 @@
 Revision history for XML-Grammar-Screeplay
 
+0.03    Tue May 22 07:46:18 IDT 2007
+        - Added the <br /> tag.
+        - Added a description of the proto-text format in the POD and
+        other POD.
+        - Fixed the space being part of the saying issue in the generated
+        HTML.
+
 0.02    Mon May 21 00:26:35 IDT 2007
         - Added the title="" attribute to the scene tag.
         - Added support for SGML-like entities

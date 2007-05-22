@@ -85,10 +85,22 @@ comment:    /<!--(.*?)-->/ms para_sep {
 
 para_sep:      /(\n\s*)+/
 
-speech_or_desc:   speech_unit  
+speech_or_desc:   speech_unit
                 | desc_unit
 
 plain_inner_text:  /([^\n<\[\]&]+\n?)+/ { $item[1] }
+
+inner_standalone_tag: /</ id attribute(s?) / *\/ *>/ space
+    {
+        XML::Grammar::Screenplay::FromProto::Node::Element->new(
+            name => $item[2],
+            children => XML::Grammar::Screenplay::FromProto::Node::List->new(
+                contents => []
+            ),
+            attrs => $item[3]
+            );
+    }
+
 
 inner_tag:         opening_tag  inner_text closing_tag {
         my ($open, $inside, $close) = @item[1..$#item];
@@ -125,6 +137,7 @@ inner_entity:      /\&\w+;/ {
 inner_text_unit:    plain_inner_text  { [ $item[1] ] }
                  |  inner_tag_or_desc { [ $item[1] ] }
                  |  inner_entity      { [ $item[1] ] }
+                 |  inner_standalone_tag { [ $item[1] ] }
 
 inner_text:       inner_text_unit(s) {
         [ map { @{$_} } @{$item[1]} ]
@@ -320,6 +333,10 @@ sub _write_elem
                     elem => $elem,
                 }
             );
+        }
+        elsif ($elem->name() eq "br")
+        {
+            $self->_writer->emptyTag("br");
         }
         elsif ($elem->isa("XML::Grammar::Screenplay::FromProto::Node::InnerDesc"))
         {
