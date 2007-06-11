@@ -1,6 +1,6 @@
 ---
 name: XML-Grammar-Screenplay
-version: 0.03
+version: 0.04
 author:
   - 'Shlomi Fish <shlomif@cpan.org>'
 abstract: |-
@@ -26,7 +26,7 @@ build_requires:
 provides:
   XML::Grammar::Screenplay:
     file: lib/XML/Grammar/Screenplay.pm
-    version: 0.03
+    version: 0.04
   XML::Grammar::Screenplay::App::FromProto:
     file: lib/XML/Grammar/Screenplay/App/FromProto.pm
   XML::Grammar::Screenplay::App::ToDocBook:
@@ -58,6 +58,12 @@ provides:
     file: lib/XML/Grammar/Screenplay/FromProto/Nodes.pm
   XML::Grammar::Screenplay::FromProto::Node::WithContent:
     file: lib/XML/Grammar/Screenplay/FromProto/Nodes.pm
+  XML::Grammar::Screenplay::FromProto::Parser:
+    file: lib/XML/Grammar/Screenplay/FromProto/Parser.pm
+  XML::Grammar::Screenplay::FromProto::Parser::PRD:
+    file: lib/XML/Grammar/Screenplay/FromProto/Parser/PRD.pm
+  XML::Grammar::Screenplay::FromProto::Parser::QnD:
+    file: lib/XML/Grammar/Screenplay/FromProto/Parser/QnD.pm
   XML::Grammar::Screenplay::ToDocBook:
     file: lib/XML/Grammar/Screenplay/ToDocBook.pm
     version: 0.01

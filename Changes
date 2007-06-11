@@ -1,5 +1,11 @@
 Revision history for XML-Grammar-Screeplay
 
+0.04    Mon Jun 11 21:26:48 IDT 2007
+        - Added the Quick-and-Dirty FromProto parser, which is slightly faster,
+        than the Parse::RecDescent one and with much better diagnostics. 
+        - More parsers can be added later.
+        - Broke some compatibility - now require "use"-ing the parser class.
+
 0.03    Tue May 22 07:46:18 IDT 2007
         - Added the <br /> tag.
         - Added a description of the proto-text format in the POD and

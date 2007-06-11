@@ -8,14 +8,13 @@ use Carp;
 use base 'XML::Grammar::Screenplay::Base';
 
 use XML::Writer;
-use Parse::RecDescent;
 use HTML::Entities ();
 
 use XML::Grammar::Screenplay::FromProto::Nodes;
 
 use Moose;
 
-has "_parser" => ('isa' => "Parse::RecDescent", 'is' => "rw");
+has "_parser" => ('isa' => "XML::Grammar::Screenplay::FromProto::Parser", 'is' => "rw");
 has "_writer" => ('isa' => "XML::Writer", 'is' => "rw");
 
 =head1 NAME
@@ -48,10 +47,11 @@ sub _init
 
     local $Parse::RecDescent::skip = "";
 
+    my $parser_class = 
+        ($args->{parser_class} || "XML::Grammar::Screenplay::FromProto::Parser::QnD");
+
     $self->_parser(
-        Parse::RecDescent->new(
-            $self->_calc_grammar()
-        )
+        $parser_class->new()
     );
 
     return 0;
@@ -62,187 +62,6 @@ sub _init
 Converts the file $path_to_file to XML and returns it.
 
 =cut
-
-sub _calc_grammar
-{
-    my $self = shift;
-
-    return <<'EOF';
-
-start : tag  {$thisparser->{ret} = $item[1]; 1 }
-
-text_unit:   tag_or_comment { $item[1] }
-           | speech_or_desc { $item[1] }
-
-tag_or_comment:   tag
-                | comment
-
-comment:    /<!--(.*?)-->/ms para_sep {
-    XML::Grammar::Screenplay::FromProto::Node::Comment->new(
-        text => $1
-    )
-    }
-
-para_sep:      /(\n\s*)+/
-
-speech_or_desc:   speech_unit
-                | desc_unit
-
-plain_inner_text:  /([^\n<\[\]&]+\n?)+/ { $item[1] }
-
-inner_standalone_tag: /</ id attribute(s?) / *\/ *>/ space
-    {
-        XML::Grammar::Screenplay::FromProto::Node::Element->new(
-            name => $item[2],
-            children => XML::Grammar::Screenplay::FromProto::Node::List->new(
-                contents => []
-            ),
-            attrs => $item[3]
-            );
-    }
-
-
-inner_tag:         opening_tag  inner_text closing_tag {
-        my ($open, $inside, $close) = @item[1..$#item];
-        if ($open->{name} ne $close->{name})
-        {
-            Carp::confess("Tags do not match: $open->{name} and $close->{name}");
-        }
-        XML::Grammar::Screenplay::FromProto::Node::Element->new(
-            name => $open->{name},
-            children => XML::Grammar::Screenplay::FromProto::Node::List->new(
-                contents => $inside
-                ),
-            attrs => $open->{attrs},
-            )
-    }
-
-inner_desc:      /\[/ inner_text /\]/ {
-        my $inside = $item[2];
-        XML::Grammar::Screenplay::FromProto::Node::InnerDesc->new(
-            children => XML::Grammar::Screenplay::FromProto::Node::List->new(
-                contents => $inside
-                ),
-            )
-    }
-
-inner_tag_or_desc:    inner_tag
-                   |  inner_desc
-
-inner_entity:      /\&\w+;/ {
-        my $inside = $item[1];
-        HTML::Entities::decode_entities($inside)
-    }
-
-inner_text_unit:    plain_inner_text  { [ $item[1] ] }
-                 |  inner_tag_or_desc { [ $item[1] ] }
-                 |  inner_entity      { [ $item[1] ] }
-                 |  inner_standalone_tag { [ $item[1] ] }
-
-inner_text:       inner_text_unit(s) {
-        [ map { @{$_} } @{$item[1]} ]
-        }
-
-addressing: /^([^:\n\+]+): /ms { $1 }
-
-saying_first_para: addressing inner_text para_sep {
-            my ($sayer, $what) = ($item[1], $item[2]);
-            +{
-             character => $sayer,
-             para => XML::Grammar::Screenplay::FromProto::Node::Paragraph->new(
-                children =>
-                XML::Grammar::Screenplay::FromProto::Node::List->new(
-                    contents => $what,
-                    )
-                ),
-            }
-            }
-
-saying_other_para: /^\++: /ms inner_text para_sep {
-        XML::Grammar::Screenplay::FromProto::Node::Paragraph->new(
-            children =>
-                XML::Grammar::Screenplay::FromProto::Node::List->new(
-                    contents => $item[2],
-                    ),
-        )
-    }
-
-speech_unit:  saying_first_para saying_other_para(s?)
-    {
-    my $first = $item[1];
-    my $others = $item[2] || [];
-        XML::Grammar::Screenplay::FromProto::Node::Saying->new(
-            character => $first->{character},
-            children => XML::Grammar::Screenplay::FromProto::Node::List->new(
-                contents => [ $first->{para}, @{$others} ],
-                ),
-        )
-    }
-
-desc_para:  inner_text para_sep { $item[1] }
-
-desc_unit_inner: desc_para(s?) inner_text { [ @{$item[1]}, $item[2] ] }
-
-desc_unit: /^\[/ms desc_unit_inner /\]\s*$/ms para_sep {
-        my $paragraphs = $item[2];
-
-        XML::Grammar::Screenplay::FromProto::Node::Description->new(
-            children => 
-                XML::Grammar::Screenplay::FromProto::Node::List->new(
-                    contents =>
-                [
-                map { 
-                XML::Grammar::Screenplay::FromProto::Node::Paragraph->new(
-                    children =>
-                        XML::Grammar::Screenplay::FromProto::Node::List->new(
-                            contents => $_,
-                            ),
-                        )
-                } @$paragraphs
-                ],
-            ),
-        )
-    }
-
-text: text_unit(s) { XML::Grammar::Screenplay::FromProto::Node::List->new(
-        contents => $item[1]
-        ) }
-      | space { XML::Grammar::Screenplay::FromProto::Node::List->new(
-        contents => []
-        ) }
-
-tag: space opening_tag space text space closing_tag space
-     {
-        my (undef, $open, undef, $inside, undef, $close) = @item[1..$#item];
-        if ($open->{name} ne $close->{name})
-        {
-            Carp::confess("Tags do not match: $open->{name} and $close->{name}");
-        }
-        XML::Grammar::Screenplay::FromProto::Node::Element->new(
-            name => $open->{name},
-            children => $inside,
-            attrs => $open->{attrs},
-            );
-     }
-
-opening_tag: '<' id attribute(s?) '>'
-    { $item[0] = { 'name' => $item[2], 'attrs' => $item[3] }; }
-
-closing_tag: '</' id '>'
-    { $item[0] = { 'name' => $item[2], }; }
-
-attribute: space id '="' attributevalue '"' space
-    { $item[0] = { 'key' => $item[2] , 'value' => $item[4] }; }
-
-attributevalue: /[^"]+/
-    { $item[0] = HTML::Entities::decode_entities($item[1]); }
-
-space: /\s*/
-
-id: /[a-zA-Z_\-]+/
-
-EOF
-}
 
 use Data::Dumper;
 
@@ -415,6 +234,16 @@ sub _read_file
     return $contents;
 }
 
+sub _calc_tree
+{
+    my ($self, $args) = @_;
+
+    my $filename = $args->{source}->{file} or
+        confess "Wrong filename given.";
+
+    return $self->_parser->process_text($self->_read_file($filename));
+}
+
 sub convert
 {
     my ($self, $args) = @_;
@@ -426,13 +255,9 @@ sub convert
     # We need this so P::RD won't skip leading whitespace at lines
     # which are siginificant.  
 
-    my $filename = $args->{source}->{file} or
-        confess "Wrong filename given.";
-    my $ret = $self->_parser->start($self->_read_file($filename));
+    my $tree = $self->_calc_tree($args);
 
-    my $tree = $self->_parser->{ret};
-
-    if (!defined($ret))
+    if (!defined($tree))
     {
         Carp::confess("Parsing failed.");
     }

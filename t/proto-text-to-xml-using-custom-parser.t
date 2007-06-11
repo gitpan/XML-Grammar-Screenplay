@@ -10,7 +10,8 @@ use Test::XML tests => 26;
 use XML::LibXML;
 
 use XML::Grammar::Screenplay::FromProto;
-use XML::Grammar::Screenplay::FromProto::Parser::PRD;
+
+use XML::Grammar::Screenplay::FromProto::Parser::QnD;
 
 sub load_xml
 {
@@ -45,7 +46,7 @@ my @tests = (qw(
 # TEST:$num_texts=13
 
 my $grammar = XML::Grammar::Screenplay::FromProto->new({
-        parser_class => "XML::Grammar::Screenplay::FromProto::Parser::PRD",
+        parser_class => "XML::Grammar::Screenplay::FromProto::Parser::QnD",
     });
 
 my $dtd = 

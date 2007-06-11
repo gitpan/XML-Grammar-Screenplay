@@ -10,6 +10,7 @@ our @EXPORT = (qw(run));
 use Getopt::Long;
 
 use XML::Grammar::Screenplay::FromProto;
+use XML::Grammar::Screenplay::FromProto::Parser::QnD;
 
 =head1 NAME
 
@@ -43,7 +44,9 @@ sub run
         die "Output filename not specified! Use the -o|--output flag!";
     }
 
-    my $converter = XML::Grammar::Screenplay::FromProto->new();
+    my $converter = XML::Grammar::Screenplay::FromProto->new({
+        parser_class => "XML::Grammar::Screenplay::FromProto::Parser::QnD",
+    });
 
     my $output_xml = $converter->convert({
             source => { file => shift(@ARGV), },
