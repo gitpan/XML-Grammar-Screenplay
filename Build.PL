@@ -48,7 +48,7 @@ my $builder = Test::Run::Builder->new(
         'XML::LibXSLT' => 0,
         'XML::Writer' => 0,
     },
-    add_to_cleanup      => [ 'XML-Grammar-Screeplay-*' ],
+    add_to_cleanup      => [ 'XML-Grammar-Screenplay-*' ],
     create_makefile_pl => 'passthrough',
     install_path =>
     {

@@ -14,7 +14,7 @@ Version 0.04
 
 =cut
 
-our $VERSION = '0.04';
+our $VERSION = '0.0401';
 
 =head1 SYNOPSIS
 
@@ -151,7 +151,7 @@ Shlomi Fish, L<http://www.shlomifish.org/>.
 
 Please report any bugs or feature requests to
 C<bug-xml-grammar-screenplay at rt.cpan.org>, or through the web interface at
-L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=XML-Grammar-Screeplay>.
+L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=XML-Grammar-Screenplay>.
 I will be notified, and then you'll automatically be notified of progress on
 your bug as I make changes.
 
@@ -175,19 +175,19 @@ You can also look for information at:
 
 =item * AnnoCPAN: Annotated CPAN documentation
 
-L<http://annocpan.org/dist/XML-Grammar-Screeplay>
+L<http://annocpan.org/dist/XML-Grammar-Screenplay>
 
 =item * CPAN Ratings
 
-L<http://cpanratings.perl.org/d/XML-Grammar-Screeplay>
+L<http://cpanratings.perl.org/d/XML-Grammar-Screenplay>
 
 =item * RT: CPAN's request tracker
 
-L<http://rt.cpan.org/NoAuth/Bugs.html?Dist=XML-Grammar-Screeplay>
+L<http://rt.cpan.org/NoAuth/Bugs.html?Dist=XML-Grammar-Screenplay>
 
 =item * Search CPAN
 
-L<http://search.cpan.org/dist/XML-Grammar-Screeplay>
+L<http://search.cpan.org/dist/XML-Grammar-Screenplay>
 
 =back
 

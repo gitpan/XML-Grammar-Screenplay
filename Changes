@@ -1,4 +1,8 @@
-Revision history for XML-Grammar-Screeplay
+Revision history for XML-Grammar-Screenplay
+
+0.0401  Sat Jul 14 10:43:57 IDT 2007
+        - Converted the "Screeplay" strings that were a leftover from
+        the wrong module-starter invocation into "Screenplay".
 
 0.04    Mon Jun 11 21:26:48 IDT 2007
         - Added the Quick-and-Dirty FromProto parser, which is slightly faster,

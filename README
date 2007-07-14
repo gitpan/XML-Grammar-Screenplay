@@ -1,4 +1,4 @@
-XML-Grammar-Screeplay
+XML-Grammar-Screenplay
 
 This is a module implementing an XML grammar for screenplays. It contains:
 
@@ -25,16 +25,16 @@ After installing, you can find documentation for this module with the perldoc co
 You can also look for information at:
 
     Search CPAN
-        http://search.cpan.org/dist/XML-Grammar-Screeplay
+        http://search.cpan.org/dist/XML-Grammar-Screenplay
 
     CPAN Request Tracker:
-        http://rt.cpan.org/NoAuth/Bugs.html?Dist=XML-Grammar-Screeplay
+        http://rt.cpan.org/NoAuth/Bugs.html?Dist=XML-Grammar-Screenplay
 
     AnnoCPAN, annotated CPAN documentation:
-        http://annocpan.org/dist/XML-Grammar-Screeplay
+        http://annocpan.org/dist/XML-Grammar-Screenplay
 
     CPAN Ratings:
-        http://cpanratings.perl.org/d/XML-Grammar-Screeplay
+        http://cpanratings.perl.org/d/XML-Grammar-Screenplay
 
 COPYRIGHT AND LICENCE
 
