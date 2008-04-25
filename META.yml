@@ -1,6 +1,6 @@
 ---
 name: XML-Grammar-Screenplay
-version: 0.0401
+version: 0.0402
 author:
   - 'Shlomi Fish <shlomif@cpan.org>'
 abstract: |-
@@ -26,7 +26,7 @@ build_requires:
 provides:
   XML::Grammar::Screenplay:
     file: lib/XML/Grammar/Screenplay.pm
-    version: 0.0401
+    version: 0.0402
   XML::Grammar::Screenplay::App::FromProto:
     file: lib/XML/Grammar/Screenplay/App/FromProto.pm
   XML::Grammar::Screenplay::App::ToDocBook:
@@ -70,7 +70,7 @@ provides:
   XML::Grammar::Screenplay::ToHTML:
     file: lib/XML/Grammar/Screenplay/ToHTML.pm
     version: 0.01
-generated_by: Module::Build version 0.2805
+generated_by: Module::Build version 0.2808
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.2.html
   version: 1.2

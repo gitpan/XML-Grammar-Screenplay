@@ -61,7 +61,7 @@ sub _init
             "Screenplay XML 0.1.0",
             File::Spec->catfile(
                 $self->_data_dir(), 
-                "product-syndication.dtd"
+                "screenplay-xml.dtd"
             ),
         );
 

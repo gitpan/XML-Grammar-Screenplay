@@ -1,5 +1,10 @@
 Revision history for XML-Grammar-Screenplay
 
+0.0402  Fri Apr 25 13:27:16 IDT 2008
+        - Fixed a thinko with the wrong path to the DTD:
+        "products-syndication.dtd" instead of "screenplay-xml.dtd".
+        Possibly a copy-and-paste bug.
+
 0.0401  Sat Jul 14 10:43:57 IDT 2007
         - Converted the "Screeplay" strings that were a leftover from
         the wrong module-starter invocation into "Screenplay".
