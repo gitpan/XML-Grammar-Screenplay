@@ -1,5 +1,12 @@
 Revision history for XML-Grammar-Screenplay
 
+0.0500  Fri Feb 27 17:48:52 IST 2009
+        - Converted to use a RelaxNG schema.
+            - Now using it in ::ToHTML instead of the DTD.
+        - Added a sanity check for no inner desc inside the addressing part.
+        - Changed the 'license' field in Build.PL from 'bsd' to 'mit'
+        which is more accurate.
+
 0.0402  Fri Apr 25 13:27:16 IDT 2008
         - Fixed a thinko with the wrong path to the DTD:
         "products-syndication.dtd" instead of "screenplay-xml.dtd".

@@ -19,7 +19,7 @@ use Moose;
 
 
 has '_data_dir' => (isa => 'Str', is => 'rw');
-has '_dtd' => (isa => 'XML::LibXML::Dtd', is => 'rw');
+has '_rng' => (isa => 'XML::LibXML::RelaxNG', is => 'rw');
 has '_xml_parser' => (isa => "XML::LibXML", is => 'rw');
 has '_stylesheet' => (isa => "XML::LibXSLT::StylesheetWrapper", is => 'rw');
 
@@ -30,11 +30,11 @@ XML to HTML.
 
 =head1 VERSION
 
-Version 0.01
+Version 0.0500
 
 =cut
 
-our $VERSION = '0.01';
+our $VERSION = '0.0500';
 
 =head2 new()
 
@@ -56,16 +56,16 @@ sub _init
 
     $self->_data_dir($data_dir);
 
-    my $dtd =
-        XML::LibXML::Dtd->new(
-            "Screenplay XML 0.1.0",
+    my $rngschema =
+        XML::LibXML::RelaxNG->new(
+            location =>
             File::Spec->catfile(
                 $self->_data_dir(), 
-                "product-syndication.dtd"
+                "screenplay-xml.rng"
             ),
         );
 
-    $self->_dtd($dtd);
+    $self->_rng($rngschema);
 
     $self->_xml_parser(XML::LibXML->new());
 
@@ -101,6 +101,22 @@ sub translate_to_html
     my $source_dom =
         $self->_xml_parser()->parse_file($args->{source}->{file})
         ;
+
+    my $ret_code;
+
+    eval
+    {
+        $ret_code = $self->_rng()->validate($source_dom);
+    };
+
+    if (defined($ret_code) && ($ret_code == 0))
+    {
+        # It's OK.
+    }
+    else
+    {
+        confess "RelaxNG validation failed [\$ret_code == $ret_code ; $@]";
+    }
 
     my $stylesheet = $self->_stylesheet();
 

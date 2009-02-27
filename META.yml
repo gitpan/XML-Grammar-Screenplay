@@ -1,14 +1,14 @@
 ---
 name: XML-Grammar-Screenplay
-version: 0.0402
+version: 0.0500
 author:
   - 'Shlomi Fish <shlomif@cpan.org>'
 abstract: |-
   CPAN distribution implementing an XML grammar for 
   screenplays.
-license: bsd
+license: mit
 resources:
-  license: http://www.opensource.org/licenses/bsd-license.php
+  license: http://www.opensource.org/licenses/mit-license.php
 requires:
   Carp: 0
   Data::Dumper: 0
@@ -26,7 +26,7 @@ build_requires:
 provides:
   XML::Grammar::Screenplay:
     file: lib/XML/Grammar/Screenplay.pm
-    version: 0.0402
+    version: 0.0500
   XML::Grammar::Screenplay::App::FromProto:
     file: lib/XML/Grammar/Screenplay/App/FromProto.pm
   XML::Grammar::Screenplay::App::ToDocBook:
@@ -37,7 +37,7 @@ provides:
     file: lib/XML/Grammar/Screenplay/Base.pm
   XML::Grammar::Screenplay::FromProto:
     file: lib/XML/Grammar/Screenplay/FromProto.pm
-    version: 0.01
+    version: 0.0500
   XML::Grammar::Screenplay::FromProto::Node:
     file: lib/XML/Grammar/Screenplay/FromProto/Nodes.pm
   XML::Grammar::Screenplay::FromProto::Node::Comment:
@@ -66,11 +66,11 @@ provides:
     file: lib/XML/Grammar/Screenplay/FromProto/Parser/QnD.pm
   XML::Grammar::Screenplay::ToDocBook:
     file: lib/XML/Grammar/Screenplay/ToDocBook.pm
-    version: 0.01
+    version: 0.0500
   XML::Grammar::Screenplay::ToHTML:
     file: lib/XML/Grammar/Screenplay/ToHTML.pm
-    version: 0.01
-generated_by: Module::Build version 0.2808
+    version: 0.0500
+generated_by: Module::Build version 0.31
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.2.html
   version: 1.2

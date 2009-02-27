@@ -372,8 +372,14 @@ sub _parse_saying_first_para
             {
                 Carp::confess("Cannot match addressing at line " . $self->_get_line_num());
             }
+            my $sayer = $1;
 
-            return ($1, $2);
+            if ($sayer =~ m{[\[\]]})
+            {
+                Carp::confess("Tried to put an inner-desc inside an addressing at line " . $self->_get_line_num());
+            }
+
+            return ($sayer);
         }
     );
 
@@ -524,6 +530,12 @@ sub _parse_non_tag_text_unit
                 elsif ($$l =~ m{\A[^:]+:})
                 {
                     return $self->_parse_speech_unit();
+                }
+                else
+                {
+                    Carp::confess ("Line " . $self->_curr_line_idx() . 
+                        " is not a description or a saying."
+                    );
                 }
             }
         );

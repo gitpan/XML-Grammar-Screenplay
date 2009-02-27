@@ -1,0 +1,98 @@
+<?xml version="1.0"?>
+<!-- $Id: testSuite.rng,v 1.12 2003/01/29 12:24:07 jjc Exp $ -->
+<grammar xmlns="http://relaxng.org/ns/structure/1.0"
+    datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"
+    >
+    <start>
+        <element name="document">
+            <element name="head">
+                <empty/>
+            </element>
+            <element name="body">
+                <attribute name="id">
+                    <data type="ID"/>
+                </attribute>
+                <oneOrMore>
+                    <ref name="scene" />
+                </oneOrMore>
+            </element>
+        </element>
+    </start>
+    <define name="several_paras">
+        <oneOrMore>
+            <ref name="para"/>
+        </oneOrMore>
+    </define>
+    <define name="single_inline_elem">
+        <choice>
+            <text/>
+            <ref name="ulink"/>
+            <ref name="bold"/>
+        </choice>
+    </define>
+    <define name="scene">
+        <element name="scene">
+            <attribute name="id">
+                <data type="ID"/>
+            </attribute>
+            <optional>
+                <attribute name="title">
+                    <text/>
+                </attribute>
+            </optional>
+            <zeroOrMore>
+                <choice>
+                    <element name="description">
+                        <ref name="several_paras"/>
+                    </element>
+                    <element name="saying">
+                        <attribute name="character">
+                            <text/>
+                        </attribute>
+                        <ref name="several_paras"/>
+                    </element>
+                </choice>
+            </zeroOrMore>
+            <zeroOrMore>
+                <ref name="scene" />
+            </zeroOrMore>
+        </element>
+    </define>
+    <define name="para">
+        <element name="para">
+            <zeroOrMore>
+                <choice>
+                    <text/>
+                    <element name="inlinedesc">
+                        <zeroOrMore>
+                            <ref name="single_inline_elem"/>
+                        </zeroOrMore>
+                    </element>
+                    <ref name="single_inline_elem"/>
+                    <element name="br">
+                        <empty/>
+                    </element>
+                </choice>
+            </zeroOrMore>
+        </element>
+    </define>
+    <define name="bold">
+        <element name="bold">
+            <text />
+        </element>
+    </define>
+    <define name="ulink">
+        <element name="ulink">
+                <attribute name="url">
+                    <text/>
+                </attribute>
+                <zeroOrMore>
+                    <choice>
+                        <text />
+                        <ref name="bold"/>
+                    </choice>
+            </zeroOrMore>
+        </element>
+    </define>
+</grammar>
+

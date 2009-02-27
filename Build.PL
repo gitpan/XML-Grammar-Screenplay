@@ -18,7 +18,7 @@ my @extradata_files;
 sub filter_files
 {
     my $filename = $File::Find::name;
-    if ((-f $filename) && ($filename =~ /\.(?:mod|xslt|dtd|ent|cat|jpg|xcf\.bz2)$/))
+    if ((-f $filename) && ($filename =~ /\.(?:mod|xslt|dtd|ent|cat|jpg|rng|xcf\.bz2)$/))
     {
         push @extradata_files, $filename;
     }
@@ -28,7 +28,7 @@ find({ wanted => \&filter_files, no_chdir => 1}, "extradata");
 
 my $builder = Test::Run::Builder->new(
     module_name         => 'XML::Grammar::Screenplay',
-    license             => 'bsd',
+    license             => 'mit',
     dist_author         => 'Shlomi Fish <shlomif@cpan.org>',
     dist_version_from   => 'lib/XML/Grammar/Screenplay.pm',
     build_requires => {

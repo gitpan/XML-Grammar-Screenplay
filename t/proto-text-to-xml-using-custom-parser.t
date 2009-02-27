@@ -5,7 +5,7 @@ use warnings;
 
 use Test::More;
 
-use Test::XML tests => 26;
+use Test::XML tests => 39;
 
 use XML::LibXML;
 
@@ -57,6 +57,10 @@ my $dtd =
         ),
     );
 
+my $rngschema = XML::LibXML::RelaxNG->new(
+        location => "./extradata/screenplay-xml.rng" 
+    );    
+
 my $xml_parser = XML::LibXML->new();
 $xml_parser->validation(0);
 
@@ -82,7 +86,14 @@ foreach my $fn (@tests)
     ok ($dom->validate($dtd), 
         "Checking for validity of '$fn'"
     );
+
+    my $code;
+    $code = $rngschema->validate($dom);
+
+    # TEST*$num_texts
+    ok ((defined($code) && ($code == 0)),
+        "The validation of '$fn' succeeded.") ||
+        diag("\$@ == $@");
 }
 
 1;
-
