@@ -1,5 +1,10 @@
 Revision history for XML-Grammar-Screenplay
 
+0.0501  Tue Mar  3 19:38:22 IST 2009
+        - Changed the Build.PL to use XML::Grammar::Builder.
+            - changed the tests accordingly, due to the lack of 
+            "blib/extradata".
+
 0.0500  Fri Feb 27 17:48:52 IST 2009
         - Converted to use a RelaxNG schema.
             - Now using it in ::ToHTML instead of the DTD.

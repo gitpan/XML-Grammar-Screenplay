@@ -34,7 +34,7 @@ sub load_xml
 # TEST:$num_texts=1
 
 my $converter = XML::Grammar::Screenplay::ToDocBook->new({
-        data_dir => File::Spec->catdir("blib", "extradata"),
+        data_dir => File::Spec->catdir(File::Spec->curdir(), "extradata"),
     });
 
 foreach my $fn (@tests)

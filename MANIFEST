@@ -5,6 +5,7 @@ extradata/screenplay-xml.rng
 extradata/screenplay-xml-to-docbook.xslt
 extradata/screenplay-xml-to-html.xslt
 inc/Test/Run/Builder.pm
+inc/XML/Grammar/Builder.pm
 lib/XML/Grammar/Screenplay/App/FromProto.pm
 lib/XML/Grammar/Screenplay/App/ToDocBook.pm
 lib/XML/Grammar/Screenplay/App/ToHTML.pm
