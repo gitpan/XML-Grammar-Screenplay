@@ -1,5 +1,9 @@
 Revision history for XML-Grammar-Screenplay
 
+0.0502  Wed Mar  4 22:19:43 IST 2009
+        - Upgraded inc/XML/Grammar/Builder.pm to 0.0101 to (hopefully)
+        handle the extradata properly under all conditions.
+
 0.0501  Tue Mar  3 19:38:22 IST 2009
         - Changed the Build.PL to use XML::Grammar::Builder.
             - changed the tests accordingly, due to the lack of 

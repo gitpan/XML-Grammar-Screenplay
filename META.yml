@@ -1,6 +1,6 @@
 ---
 name: XML-Grammar-Screenplay
-version: 0.0501
+version: 0.0502
 author:
   - 'Shlomi Fish <shlomif@cpan.org>'
 abstract: |-
@@ -26,7 +26,7 @@ build_requires:
 provides:
   XML::Grammar::Screenplay:
     file: lib/XML/Grammar/Screenplay.pm
-    version: 0.0501
+    version: 0.0502
   XML::Grammar::Screenplay::App::FromProto:
     file: lib/XML/Grammar/Screenplay/App/FromProto.pm
   XML::Grammar::Screenplay::App::ToDocBook:
@@ -37,7 +37,7 @@ provides:
     file: lib/XML/Grammar/Screenplay/Base.pm
   XML::Grammar::Screenplay::FromProto:
     file: lib/XML/Grammar/Screenplay/FromProto.pm
-    version: 0.0501
+    version: 0.0502
   XML::Grammar::Screenplay::FromProto::Node:
     file: lib/XML/Grammar/Screenplay/FromProto/Nodes.pm
   XML::Grammar::Screenplay::FromProto::Node::Comment:
@@ -66,10 +66,10 @@ provides:
     file: lib/XML/Grammar/Screenplay/FromProto/Parser/QnD.pm
   XML::Grammar::Screenplay::ToDocBook:
     file: lib/XML/Grammar/Screenplay/ToDocBook.pm
-    version: 0.0501
+    version: 0.0502
   XML::Grammar::Screenplay::ToHTML:
     file: lib/XML/Grammar/Screenplay/ToHTML.pm
-    version: 0.0501
+    version: 0.0502
 generated_by: Module::Build version 0.32
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.2.html
