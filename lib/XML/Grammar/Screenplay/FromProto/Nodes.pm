@@ -1,3 +1,5 @@
+package XML::Grammar::Screenplay::FromProto::Nodes;
+
 use strict;
 use warnings;
 
