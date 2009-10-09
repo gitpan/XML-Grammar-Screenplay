@@ -17,6 +17,8 @@ use Moose;
 has "_parser" => ('isa' => "XML::Grammar::Screenplay::FromProto::Parser", 'is' => "rw");
 has "_writer" => ('isa' => "XML::Writer", 'is' => "rw");
 
+my $screenplay_ns = q{http://web-cpan.berlios.de/modules/XML-Grammar-Screenplay/screenplay-xml-0.2/};
+
 =head1 NAME
 
 XML::Grammar::Screenplay::FromProto - module that converts well-formed
@@ -24,11 +26,11 @@ text representing a screenplay to an XML format.
 
 =head1 VERSION
 
-Version 0.0503
+Version 0.0600
 
 =cut
 
-our $VERSION = '0.0503';
+our $VERSION = '0.0600';
 
 =head2 new()
 
@@ -69,7 +71,8 @@ sub _output_tag
 {
     my ($self, $args) = @_;
 
-    $self->_writer->startTag(@{$args->{start}});
+    my @start = @{$args->{start}};
+    $self->_writer->startTag([$screenplay_ns,$start[0]], @start[1..$#start]);
 
     $args->{in}->($self, $args);
 
@@ -263,14 +266,22 @@ sub convert
     }
 
     my $buffer = "";
-    my $writer = XML::Writer->new(OUTPUT => \$buffer, ENCODING => "utf-8",);
+    my $writer = XML::Writer->new(
+        OUTPUT => \$buffer, 
+        ENCODING => "utf-8",
+        NAMESPACES => 1,
+        PREFIX_MAP =>
+        {
+             $screenplay_ns => "",
+        }
+    );
 
     $writer->xmlDecl("utf-8");
     $writer->doctype("document", undef, "screenplay-xml.dtd");
-    $writer->startTag("document");
-    $writer->startTag("head");
+    $writer->startTag([$screenplay_ns, "document"]);
+    $writer->startTag([$screenplay_ns, "head"]);
     $writer->endTag();
-    $writer->startTag("body", "id" => "index",);
+    $writer->startTag([$screenplay_ns, "body"], "id" => "index",);
 
     # Now we're inside the body.
     $self->_writer($writer);

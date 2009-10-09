@@ -5,7 +5,7 @@ use warnings;
 
 use Test::More;
 
-use Test::XML tests => 39;
+use Test::XML tests => 26;
 
 use XML::LibXML;
 
@@ -49,14 +49,6 @@ my $grammar = XML::Grammar::Screenplay::FromProto->new({
         parser_class => "XML::Grammar::Screenplay::FromProto::Parser::QnD",
     });
 
-my $dtd = 
-    XML::LibXML::Dtd->new(
-        "Screenplay XML 0.1.0",
-        File::Spec->catfile(
-            "extradata", "screenplay-xml.dtd",
-        ),
-    );
-
 my $rngschema = XML::LibXML::RelaxNG->new(
         location => "./extradata/screenplay-xml.rng" 
     );    
@@ -81,11 +73,6 @@ foreach my $fn (@tests)
     );
 
     my $dom = $xml_parser->parse_string($got_xml);
-
-    # TEST*$num_texts
-    ok ($dom->validate($dtd), 
-        "Checking for validity of '$fn'"
-    );
 
     my $code;
     $code = $rngschema->validate($dom);

@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <!DOCTYPE document SYSTEM "screenplay-xml.dtd">
-<document>
+<document xmlns="http://web-cpan.berlios.de/modules/XML-Grammar-Screenplay/screenplay-xml-0.2/">
     <head>
     </head>
     <body id="index">

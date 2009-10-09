@@ -1,14 +1,15 @@
 <?xml version="1.0"?>
 <!-- $Id: testSuite.rng,v 1.12 2003/01/29 12:24:07 jjc Exp $ -->
 <grammar xmlns="http://relaxng.org/ns/structure/1.0"
+    xmlns:sp="http://web-cpan.berlios.de/modules/XML-Grammar-Screenplay/screenplay-xml-0.2/"
     datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"
     >
     <start>
-        <element name="document">
-            <element name="head">
+        <element name="sp:document">
+            <element name="sp:head">
                 <empty/>
             </element>
-            <element name="body">
+            <element name="sp:body">
                 <attribute name="id">
                     <data type="ID"/>
                 </attribute>
@@ -31,7 +32,7 @@
         </choice>
     </define>
     <define name="scene">
-        <element name="scene">
+        <element name="sp:scene">
             <attribute name="id">
                 <data type="ID"/>
             </attribute>
@@ -42,10 +43,10 @@
             </optional>
             <zeroOrMore>
                 <choice>
-                    <element name="description">
+                    <element name="sp:description">
                         <ref name="several_paras"/>
                     </element>
-                    <element name="saying">
+                    <element name="sp:saying">
                         <attribute name="character">
                             <text/>
                         </attribute>
@@ -59,17 +60,17 @@
         </element>
     </define>
     <define name="para">
-        <element name="para">
+        <element name="sp:para">
             <zeroOrMore>
                 <choice>
                     <text/>
-                    <element name="inlinedesc">
+                    <element name="sp:inlinedesc">
                         <zeroOrMore>
                             <ref name="single_inline_elem"/>
                         </zeroOrMore>
                     </element>
                     <ref name="single_inline_elem"/>
-                    <element name="br">
+                    <element name="sp:br">
                         <empty/>
                     </element>
                 </choice>
@@ -77,12 +78,12 @@
         </element>
     </define>
     <define name="bold">
-        <element name="bold">
+        <element name="sp:bold">
             <text />
         </element>
     </define>
     <define name="ulink">
-        <element name="ulink">
+        <element name="sp:ulink">
                 <attribute name="url">
                     <text/>
                 </attribute>

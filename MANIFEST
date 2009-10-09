@@ -4,6 +4,7 @@ extradata/screenplay-xml.dtd
 extradata/screenplay-xml.rng
 extradata/screenplay-xml-to-docbook.xslt
 extradata/screenplay-xml-to-html.xslt
+extradata/screenplay-xml-to-xsl-fo.xslt
 inc/Test/Run/Builder.pm
 inc/XML/Grammar/Builder.pm
 lib/XML/Grammar/Screenplay/App/FromProto.pm
@@ -22,6 +23,7 @@ Makefile.PL
 MANIFEST
 META.yml # Will be created by "make dist"
 README
+rejects/proto-text-to-xml.t
 t/00-load.t
 t/app-to-html.t
 t/boilerplate.t
@@ -57,7 +59,7 @@ t/lib/run-test-1/XML/Grammar/Screenplay/ConfigData.pm
 t/pod-coverage.t
 t/pod.t
 t/proto-text-invalid.t
-t/proto-text-to-xml.t
 t/proto-text-to-xml-using-custom-parser.t
 t/qnd-parser-unit.t
 t/to-docbook.t
+t/to-xhtml.t

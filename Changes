@@ -1,5 +1,11 @@
 Revision history for XML-Grammar-Screenplay
 
+0.0600  Fri Oct  9 11:35:30 IST 2009
+        - Converted the generated Screenplay-XML to its own namespace:
+        http://web-cpan.berlios.de/modules/XML-Grammar-Screenplay/screenplay-xml-0.2/
+        - Adapted the stylesheets, the RelaxNG schema, etc. to that while
+        adapting the test scripts. 
+
 0.0503  Wed Jul 29 10:12:38 IDT 2009
         - Included a "package XML::Grammar::Screenplay::FromProto::Nodes"
         statement at the top of:

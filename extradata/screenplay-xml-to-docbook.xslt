@@ -1,5 +1,6 @@
 <xsl:stylesheet version = '1.0'
-     xmlns:xsl='http://www.w3.org/1999/XSL/Transform'
+    xmlns:xsl='http://www.w3.org/1999/XSL/Transform'
+    xmlns:sp="http://web-cpan.berlios.de/modules/XML-Grammar-Screenplay/screenplay-xml-0.2/"
      >
 
 <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"
@@ -8,19 +9,19 @@
  />
 
 <xsl:template match="/">
-        <xsl:apply-templates select="//body" />  
+        <xsl:apply-templates select="//sp:body" />  
 </xsl:template>
 
-<xsl:template match="body">
+<xsl:template match="sp:body">
     <article>
         <xsl:attribute name="id">
             <xsl:value-of select="@id" />
         </xsl:attribute>
-        <xsl:apply-templates select="scene" />
+        <xsl:apply-templates select="sp:scene" />
     </article>
 </xsl:template>
 
-<xsl:template match="scene">
+<xsl:template match="sp:scene">
     <section>
         <xsl:attribute name="id">
             <xsl:value-of select="@id" />
@@ -36,11 +37,11 @@
                 </xsl:otherwise>
             </xsl:choose> 
         </title>
-        <xsl:apply-templates select="scene|description|saying" />
+        <xsl:apply-templates select="sp:scene|sp:description|sp:saying" />
     </section>
 </xsl:template>
 
-<xsl:template match="description">
+<xsl:template match="sp:description">
     <section role="description" id="{generate-id()}">
         <title></title>
             <xsl:apply-templates />
@@ -48,7 +49,7 @@
 </xsl:template>
 
 <xsl:template match="saying">
-    <section role="saying" id="{generate-id()}">
+    <section role="sp:saying" id="{generate-id()}">
         <title></title>
         <xsl:apply-templates />
     </section>
@@ -69,7 +70,7 @@
     </para>
 </xsl:template>
 
-<xsl:template match="ulink">
+<xsl:template match="sp:ulink">
     <ulink>
         <xsl:attribute name="url">
             <xsl:value-of select="@url" />
@@ -77,13 +78,13 @@
     </ulink>
 </xsl:template>
 
-<xsl:template match="bold">
+<xsl:template match="sp:bold">
     <emphasis role="bold">
         <xsl:apply-templates />
     </emphasis>
 </xsl:template>
 
-<xsl:template match="inlinedesc">
+<xsl:template match="sp:inlinedesc">
     <phrase>[<xsl:apply-templates />]</phrase>
 </xsl:template>
 
